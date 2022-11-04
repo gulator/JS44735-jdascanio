@@ -1,0 +1,149 @@
+
+
+*{
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap');
+}
+.bgimage{
+    height: 500px;
+    background-image: url('../img/bg-main.webp');
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    border-bottom: 6px solid rgb(0, 44, 0);
+}
+
+.contenedorMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 550px;
+    background-color: rgb(156, 185, 156);
+    opacity: 0.75;
+    border-radius: 10px;
+    /*box-shadow: 2px 2px 4px rgb(0, 44, 0);*/
+
+}
+
+.contenedorMain h2 {
+    color: rgb(0, 44, 0);
+    font-size: 45px;
+    /*font-weight: bold;*/
+    font-family: 'Nothing You Could Do', cursive;
+}
+.contenedorMain h4 {
+    color: rgb(0, 44, 0);
+    font-size: 20px;
+    /*font-weight: bold;*/
+    font-family: 'Nothing You Could Do', cursive;
+}
+
+.contenedor{    
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    grid-area: prod;
+}
+.areaGrid{
+    display: grid;
+    grid-template-areas: 
+    'prod prod prod prod carr carr'
+    'prod prod prod prod carr carr'
+    'prod prod prod prod carr carr'
+    'prod prod prod prod carr carr';
+    gap: 10px;
+}
+
+.carrito{
+    border-left: 1px solid #dddddd;    
+    grid-area: carr;
+}
+
+h3{
+    margin: 6px;
+    color: grey;
+}
+.detalleItemCarro{
+    display: grid;
+    grid-template-areas:
+    'producto producto cant total';
+}
+.detalleItemCarro p{
+    margin: 1px;
+    font-size: 0.7rem;
+    padding: 5px;
+    color: grey;
+}
+.producto{
+    grid-area:producto;
+}
+.cantidad{
+    grid-area:cant;
+}
+.total{
+    grid-area:total;
+}
+.itemCarro{
+    display: flex;
+    flex-direction: column;
+}
+.visualItemCarro{
+    display: flex;
+}
+
+
+.cardProducto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /*overflow: hidden;*/
+    height: 360px;
+    width: 250px;
+    /*border: 1px solid grey;*/
+    border-radius: 8px;
+    
+}
+
+.imgProducto{
+    width: 170px;    
+}
+.carro{
+    width: 40px;
+    height: 40px;
+}
+.descProducto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.descProducto p, h2, h5{
+    margin: 2px;
+}
+.descProducto p{
+    font-size: 0.55rem;
+}
+
+.cant_btn{
+    width: 25px;
+    margin: 10px;
+    
+}
+.cant_input{
+    width: 25px;
+    text-align: center;
+}
+.btn_carrito{
+    margin-top: 5px;
+    width: 100px;
+    height: 25px;
+    border: 0px solid;
+    border-radius: 5px;
+    background: #00bc0d;
+}

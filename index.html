@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Pepe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <section class="bgimage">
+        <div class="contenedorMain">
+            <h2>Verduleria Don Pepe</h2>
+            <h4>Av. Centenario 1440, San Isidro</h4>
+        </div>
+        <!-- <img src="img/bg-main.webp" alt="verduras varias"> -->
+    </section>
+    <div class="areaGrid">
+        <section class="contenedor">
+            <div class="cardProducto">
+                <img class="imgProducto" src="img/cebolla.webp" alt="">
+                <div class="descProducto">
+                    <h5>Cebolla</h5>
+                    <h2>$15</h2>
+                    <p>precio por unidad</p>
+
+                    <div class="cont_btns">
+                        <button class="cant_btn_menos">-</button>
+                        <input class="cant_input" type="number" value=1>
+                        <button class="cant_btn_mas">+</button>
+                    </div>
+                    <button class="btn_carrito">agregar</button>
+                </div>
+            </div>
+            <div class="cardProducto">
+                <img class="imgProducto" src="img/kiwi.webp" alt="">
+                <div class="descProducto">
+                    <h5>Fruta</h5>
+                    <h2>$15</h2>
+                    <p>precio por unidad</p>
+
+                    <div class="cont_btns">
+                        <button class="cant_btn_menos">-</button>
+                        <input class="cant_input" type="number" value=1>
+                        <button class="cant_btn_mas">+</button>
+                    </div>
+                    <button class="btn_carrito">agregar</button>
+                </div>
+            </div>
+        </section>
+        <section class="carrito">
+            <div class="itemCarro">
+                <h3>Carrito</h3>
+                <div class="detalleItemCarro">
+                    <p class="producto">producto</p>
+                    <p class="cantidad">cantidad </p>
+                    <p class="total">Total </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="productos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
