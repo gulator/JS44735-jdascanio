@@ -1,7 +1,6 @@
 let productosCarrito = [];
 let valorCarrito = [];
 
-
 //CHEQUEA EL LOCAL STORAGE SI HAY UN CARRITO ARMADO Y LO CARGA
 function actualizarCarro() {
   let valores = JSON.parse(localStorage.getItem("carrito"));
@@ -55,7 +54,9 @@ for (let valInputs of valoresInputs) {
 function chequearInput(e) {
   let tecla = parseInt(e.target.value);
   if (tecla <= 0) {
-    alert("Ingrese un valor mayor a 0");
+    let alerta = document.getElementById("alerta");
+    alerta.className = "alerta";
+    alerta.innerHTML = "<p>Debe colocar un valor mayor a cero</p>";
   } else {
     let lineaTarget =
       e.target.parentElement.parentElement.children[0].innerText;
@@ -77,7 +78,7 @@ function chequearInput(e) {
             }
             productosCarrito = [];
             actualizarCarro();
-            document.location.reload();           
+            document.location.reload();
             break;
           }
         }
@@ -159,7 +160,7 @@ function btnAgregar(e) {
         }
         productosCarrito = [];
         actualizarCarro();
-        document.location.reload();        
+        document.location.reload();
         break;
       }
     }
