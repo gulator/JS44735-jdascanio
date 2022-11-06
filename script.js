@@ -1,8 +1,93 @@
-let productosCarrito = []
+let productosCarrito = [];
+let valorCarrito = [];
 
-let valores = JSON.parse(localStorage.getItem('carrito'));
-console.log(valores)
 
+//CHEQUEA EL LOCAL STORAGE SI HAY UN CARRITO ARMADO Y LO CARGA
+function actualizarCarro() {
+  let valores = JSON.parse(localStorage.getItem("carrito"));
+  if (valores != null) {
+    for (let n of valores) {
+      productosCarrito.push(n);
+      let divProducto = document.createElement("div");
+      let divBorrar = document.createElement("div");
+      let divInput = document.createElement("div");
+      let totalAPagar = document.getElementById("totalAPagar");
+      let nodeProd = document.createElement("p");
+      let nodeCant = document.createElement("input");
+      let nodeTotal = document.createElement("p");
+      let boton = document.createElement("button");
+      let textoBoton = document.createTextNode("borrar");
+      boton.appendChild(textoBoton);
+      boton.className = "borrar";
+      divProducto.className = "detalleItemCarro";
+      divBorrar.className = "divBorrar";
+      divInput.className = "divBorrar";
+      nodeProd.className = "producto";
+      nodeCant.className = "cant_input_carro";
+      nodeCant.type = "number";
+      nodeCant.value = n.cantidad;
+      nodeTotal.className = "total";
+      nodeProd.appendChild(document.createTextNode(n.nombre));
+      nodeCant.appendChild(document.createTextNode(n.cantidad));
+      nodeTotal.appendChild(document.createTextNode("$" + n.total));
+      divBorrar.appendChild(boton);
+      divInput.appendChild(nodeCant);
+      divProducto.append(nodeProd, divInput, nodeTotal, divBorrar);
+      valorCarrito = [];
+      for (let n of valores) {
+        valorCarrito.push(n.total);
+      }
+      let precioCarrito = valorCarrito.reduce((a, b) => {
+        return a + b;
+      }, 0);
+
+      document.querySelector(".itemCarro").appendChild(divProducto);
+      totalAPagar.innerHTML = "Total: $" + precioCarrito;
+    }
+  }
+}
+actualizarCarro();
+
+let valoresInputs = document.querySelectorAll(".cant_input_carro");
+for (let valInputs of valoresInputs) {
+  valInputs.addEventListener("change", chequearInput);
+}
+function chequearInput(e) {
+  let tecla = parseInt(e.target.value);
+  if (tecla <= 0) {
+    alert("Ingrese un valor mayor a 0");
+  } else {
+    let lineaTarget =
+      e.target.parentElement.parentElement.children[0].innerText;
+    let productoSeleccionado = lineaTarget.toLowerCase();
+    for (let items of productos) {
+      if (items.nombre == productoSeleccionado) {
+        let pUnitario = items.precio;
+        for (let x of productosCarrito) {
+          if (x.nombre == lineaTarget) {
+            x.cantidad = e.target.value;
+            x.total = total(e.target.value, pUnitario);
+            localStorage.clear();
+            let carritoJSON = JSON.stringify(productosCarrito);
+            localStorage.setItem("carrito", carritoJSON);
+            let elem = document.querySelectorAll(".detalleItemCarro");
+            let valori = elem.length - 1;
+            for (let i = valori; i >= 0; i--) {
+              elem[i].parentNode.removeChild(elem[i]);
+            }
+            productosCarrito = [];
+            actualizarCarro();
+            document.location.reload();           
+            break;
+          }
+        }
+        break;
+      }
+    }
+  }
+}
+
+//BOTONES + Y - DE CADA PRODUCTO
 let menos = document.querySelectorAll(".cant_btn_menos");
 let mas = document.querySelectorAll(".cant_btn_mas");
 
@@ -31,69 +116,133 @@ function sumar(e) {
   input.value = valorCampo;
 }
 
-function total (a,b){
-    return a * b
+function total(a, b) {
+  return a * b;
 }
 
 let agregar = document.querySelectorAll(".btn_carrito");
 
-for (let n of agregar) n.addEventListener("click", btnAgregar);
+for (let n of agregar) {
+  n.addEventListener("click", btnAgregar);
+}
 
-let valorCarrito = []
-
-
+function chequearProd(val) {
+  for (let x of productosCarrito) {
+    if (x.nombre == val) {
+      return true;
+      break;
+    }
+  }
+}
 
 function btnAgregar(e) {
   let elemento = e.target;
-  let btn = elemento.parentElement.children[4];
   let prod = elemento.parentElement.children[0].innerText;
   let valorPrecio = elemento.parentElement.children[1].innerText;
   let cantidad = parseInt(elemento.parentElement.children[3].children[1].value);
   let precio = valorPrecio.slice(1);
-  let totalPrecio = total(cantidad,precio);
+  let totalPrecio = total(cantidad, precio);
 
-  let $producto = {"nombre":prod, "cantidad":cantidad,"total":totalPrecio}
-  productosCarrito.push($producto);
+  //SI EL PRODUCTO ESTA EN EL CARRITO
+  if (chequearProd(prod)) {
+    for (let x of productosCarrito) {
+      if (x.nombre == prod) {
+        x.cantidad += cantidad;
+        x.total = total(x.cantidad, precio);
+        localStorage.clear();
+        let carritoJSON = JSON.stringify(productosCarrito);
+        localStorage.setItem("carrito", carritoJSON);
+        let elem = document.querySelectorAll(".detalleItemCarro");
+        let valori = elem.length - 1;
+        for (let i = valori; i >= 0; i--) {
+          elem[i].parentNode.removeChild(elem[i]);
+        }
+        productosCarrito = [];
+        actualizarCarro();
+        document.location.reload();        
+        break;
+      }
+    }
+  } else {
+    let $producto = { nombre: prod, cantidad: cantidad, total: totalPrecio };
+    productosCarrito.push($producto);
 
-  let divProducto = document.createElement('div');
-  let divBorrar = document.createElement('div');
-  let totalAPagar = document.getElementById('totalAPagar')
-  let nodeProd = document.createElement('p');
-  let nodeCant = document.createElement('input');
-  let nodeTotal = document.createElement('p');
-  let boton = document.createElement('button');
-  let textoBoton = document.createTextNode('borrar')
-  boton.appendChild(textoBoton);
-  boton.className = 'borrar';
-  divProducto.className = 'detalleItemCarro';
-  divBorrar.className = 'divBorrar';
-  nodeProd.className = 'producto';
-  nodeCant.className = 'cant_input';
-  nodeCant.type = 'number';
-  nodeCant.value = cantidad;
-  nodeTotal.className = 'total';
-  nodeProd.appendChild(document.createTextNode($producto.nombre));
-  nodeCant.appendChild(document.createTextNode($producto.cantidad));
-  nodeTotal.appendChild(document.createTextNode($producto.total));
-  divBorrar.appendChild(boton)
-  divProducto.append(nodeProd,nodeCant,nodeTotal,divBorrar);
+    let divProducto = document.createElement("div");
+    let divBorrar = document.createElement("div");
+    let divInput = document.createElement("div");
+    let totalAPagar = document.getElementById("totalAPagar");
+    let nodeProd = document.createElement("p");
+    let nodeCant = document.createElement("input");
+    let nodeTotal = document.createElement("p");
+    let boton = document.createElement("button");
+    let textoBoton = document.createTextNode("borrar");
+    boton.appendChild(textoBoton);
+    boton.className = "borrar";
+    divProducto.className = "detalleItemCarro";
+    divBorrar.className = "divBorrar";
+    divInput.className = "divBorrar";
+    nodeProd.className = "producto";
+    nodeCant.className = "cant_input_carro";
+    nodeCant.type = "number";
+    nodeCant.value = cantidad;
+    nodeTotal.className = "total";
+    nodeProd.appendChild(document.createTextNode($producto.nombre));
+    nodeCant.appendChild(document.createTextNode($producto.cantidad));
+    nodeTotal.appendChild(document.createTextNode("$" + $producto.total));
+    divBorrar.appendChild(boton);
+    divInput.appendChild(nodeCant);
+    divProducto.append(nodeProd, divInput, nodeTotal, divBorrar);
 
-  let carritoJSON = JSON.stringify (productosCarrito);
-  localStorage.setItem("carrito",carritoJSON);
-  let valores = JSON.parse(localStorage.getItem('carrito'));
+    let carritoJSON = JSON.stringify(productosCarrito);
+    localStorage.setItem("carrito", carritoJSON);
+    let valores = JSON.parse(localStorage.getItem("carrito"));
 
-valorCarrito = []  
-for (let n of valores){
-  valorCarrito.push(n.total)
+    valorCarrito = [];
+    for (let n of valores) {
+      valorCarrito.push(n.total);
+    }
+    let precioCarrito = valorCarrito.reduce((a, b) => {
+      return a + b;
+    }, 0);
+
+    document.querySelector(".itemCarro").appendChild(divProducto);
+    totalAPagar.innerHTML = "Total: $" + precioCarrito;
+    document.location.reload();
+  }
 }
-  let precioCarrito = valorCarrito.reduce((a,b)=>{return a + b},0)
 
-  document.querySelector('.itemCarro').appendChild(divProducto);
-  totalAPagar.innerHTML = 'Total: $'+precioCarrito 
-  console.log(precioCarrito)
-  
-  /*let $nuevoProducto = document.innerText ='<div class="detalleItemCarro"><p class="producto">'+$producto.nombre+'</p><p class="cantidad">'+$producto.cantidad+'</p><p class="total">'+$producto.total+'</p></div>'
-  console.log($nuevoProducto)
-  document.querySelector('itemCarro').appendChild($nuevoProducto)*/
-  
+let borrarItem = document.querySelectorAll(".borrar");
+for (let b of borrarItem) {
+  b.addEventListener("click", quitarItem);
 }
+
+function quitarItem(e) {
+  let elemento = e.target;
+  let prodParaBorrar =
+    elemento.parentElement.parentElement.children[0].innerText;
+
+  for (let x in productosCarrito) {
+    if (productosCarrito[x].nombre == prodParaBorrar) {
+      productosCarrito.splice(x, 1);
+    }
+  }
+  localStorage.clear();
+  let carritoJSON = JSON.stringify(productosCarrito);
+  localStorage.setItem("carrito", carritoJSON);
+  let elem = document.querySelectorAll(".detalleItemCarro");
+  let valori = elem.length - 1;
+  for (let i = valori; i >= 0; i--) {
+    elem[i].parentNode.removeChild(elem[i]);
+  }
+  productosCarrito = [];
+  actualizarCarro();
+  document.location.reload();
+}
+
+let limpiarCarrito = document.getElementById("vaciarCarrito");
+limpiarCarrito.addEventListener("click", () => {
+  localStorage.clear();
+  productosCarrito = [];
+  actualizarCarro();
+  document.location.reload();
+});
