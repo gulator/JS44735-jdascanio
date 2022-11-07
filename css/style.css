@@ -1,7 +1,8 @@
 * {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
-  @import url("https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap");*/
+
+  @import url("https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap");
 }
 .bgimage {
   height: 500px;
@@ -58,6 +59,8 @@
 
 .carrito {
   width: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-left: 1px solid #dddddd;
   grid-area: carr;
 }
@@ -70,15 +73,13 @@ h4 {
   margin: 6px;
   color: grey;
 }
-.detalleItemCarro {
-  display: grid;
-  grid-template-areas: "producto cant total borrar";
-}
+
 .detalleItemCarro p {
   margin: 1px;
   font-size: 0.75rem;
   padding: 5px;
   color: grey;
+  border-color: 0px solid rgb(189, 189, 189);
 }
 .titulo {
   font-size: 0.8rem !important;
@@ -86,25 +87,23 @@ h4 {
   color: rgb(0, 44, 0) !important;
 }
 .producto {
-  width: 100px;
-  grid-area: producto;
   text-align: left;
+  padding-left: 10px;
+  font-size: 0.8rem;
+  color: grey;
 }
-.cantidad {
-  width: 50px;
-  grid-area: cant;
-  text-align: right;
+.valores {
+  text-align: center;
+  font-size: 0.8rem;
+  color: grey;
 }
-.total {
-  width: 50px;
-  grid-area: total;
-  text-align: right;
-}
-.divBorrar {
-  width: 60px;
+
+.colBorrar {
+  text-align: center;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
+
 .borrar {
   display: inline-block;
   cursor: pointer;
@@ -117,6 +116,13 @@ h4 {
   border: 0px solid;
   border-radius: 2px;
   background: #5f0020;
+}
+
+.borrarItem {
+  cursor: pointer;
+  width: 15px;
+  filter: invert(9%) sepia(28%) saturate(7280%) hue-rotate(322deg)
+    brightness(99%) contrast(112%);
 }
 .colorless {
   background: none;
@@ -173,9 +179,11 @@ h5 {
 }
 
 .cant_input_carro {
-  width: 35px;
+  border: 0px solid;
+  height: 25px;
+  width: 40px;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: grey;
 }
 .btn_carrito {
@@ -189,6 +197,7 @@ h5 {
 }
 .headerCarrito {
   display: flex;
+  justify-items: space-between;
 }
 .vaciarCarrito {
   width: 25px;
@@ -196,11 +205,18 @@ h5 {
   filter: invert(9%) sepia(28%) saturate(7280%) hue-rotate(322deg)
     brightness(99%) contrast(112%);
 }
-.alerta{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #5f0020;
-    height: 50px;
-    background: #ffb9d0;
+.alerta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5f0020;
+  height: 50px;
+  background: #ffb9d0;
+}
+.headerTabla {
+  color: grey;
+  height: 25px;
+  font-size: 0.9rem;
+  width: 100%;
+  background: whitesmoke;
 }
