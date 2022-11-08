@@ -1,5 +1,6 @@
 let productosCarrito = [];
 let valorCarrito = [];
+actualizarCarro();
 
 //CHEQUEA EL LOCAL STORAGE SI HAY UN CARRITO ARMADO Y LO CARGA
 function actualizarCarro() {
@@ -7,6 +8,7 @@ function actualizarCarro() {
   if (valores != null) {
     for (let n of valores) {
       productosCarrito.push(n);
+      let tableBody = document.getElementById("tbody");
       let nuevoRow = document.createElement("tr");
       let prodTableData = document.createElement("td");
       let cantTableData = document.createElement("td");
@@ -34,8 +36,8 @@ function actualizarCarro() {
       btnTableData.className = "colBorrar";
 
       nuevoRow.className = "productoRowTabla";
-
       nuevoRow.append(prodTableData, cantTableData, impTableData, btnTableData);
+
       valorCarrito = [];
       for (let n of valores) {
         valorCarrito.push(n.total);
@@ -44,28 +46,37 @@ function actualizarCarro() {
         return a + b;
       }, 0);
 
-      document.querySelector(".detalleItemCarro").appendChild(nuevoRow);
+      document.querySelector(".tbody").appendChild(nuevoRow);
       totalAPagar.innerHTML = "Total: $" + precioCarrito;
+
+      let borrarItem = document.querySelectorAll(".borrarItem");
+      for (let b of borrarItem) {
+        b.addEventListener("click", quitarItem);
+      }
+
+      let valoresInputs = document.querySelectorAll(".cant_input_carro");
+      for (let valInputs of valoresInputs) {
+      valInputs.addEventListener("change", chequearInput);
+}
     }
   }
 }
-actualizarCarro();
+//--CHEQUEAR INPUT--
 
-let valoresInputs = document.querySelectorAll(".cant_input_carro");
-for (let valInputs of valoresInputs) {
-  valInputs.addEventListener("change", chequearInput);
-}
 function chequearInput(e) {
   let tecla = parseInt(e.target.value);
+  console.log(tecla);
   if (tecla <= 0) {
     let alerta = document.getElementById("alerta");
     alerta.className = "alerta";
     alerta.innerHTML = "<p>Debe colocar un valor mayor a cero</p>";
   } else {
-    console.log(productosCarrito)
-    let lineaTarget = e.target.parentElement.parentElement.children[0].innerText;
+    alerta.className = ""
+    alerta.innerHTML = ""
+    let lineaTarget =
+      e.target.parentElement.parentElement.children[0].innerText;
     let productoSeleccionado = lineaTarget.toLowerCase();
-    for (let items of productos) {      
+    for (let items of productos) {
       if (items.nombre == productoSeleccionado) {
         let pUnitario = items.precio;
         for (let x of productosCarrito) {
@@ -76,20 +87,20 @@ function chequearInput(e) {
             localStorage.clear();
             let carritoJSON = JSON.stringify(productosCarrito);
             localStorage.setItem("carrito", carritoJSON);
-            let elem = document.querySelectorAll(".productoRowTabla");
+
+            let elem = document.getElementById("tbody");
+            elem.innerHTML = "";
+
+            /*let elem = document.querySelectorAll(".productoRowTabla");
             let valori = elem.length - 1;
             for (let i = valori; i >= 0; i--) {
-              elem[i].parentNode.removeChild(elem[i]);
-            }
+              elem[i].parentNode.removeChild(elem[i]);*/
+
             productosCarrito = [];
             actualizarCarro();
-            document.location.reload();
-            break;
           }
         }
       }
-      
-
     }
   }
 }
@@ -143,6 +154,7 @@ function chequearProd(val) {
 }
 
 function btnAgregar(e) {
+  e.preventDefault();
   let elemento = e.target;
   let prod = elemento.parentElement.children[0].innerText;
   let valorPrecio = elemento.parentElement.children[1].innerText;
@@ -159,21 +171,25 @@ function btnAgregar(e) {
         localStorage.clear();
         let carritoJSON = JSON.stringify(productosCarrito);
         localStorage.setItem("carrito", carritoJSON);
-        let elem = document.querySelectorAll(".productoRowTabla");
+        let elem = document.getElementById("tbody");
+        elem.innerHTML = "";
+        /*let elem = document.querySelectorAll(".productoRowTabla");
         let valori = elem.length - 1;
         for (let i = valori; i >= 0; i--) {
           elem[i].parentNode.removeChild(elem[i]);
-        }
+        }*/
         productosCarrito = [];
         actualizarCarro();
-        document.location.reload();
-        break;
+
+        /*document.location.reload();
+        break;*/
       }
     }
   } else {
     let $producto = { nombre: prod, cantidad: cantidad, total: totalPrecio };
     productosCarrito.push($producto);
-
+    console.log(productosCarrito);
+    let tableBody = document.getElementById("tbody");
     let nuevoRow = document.createElement("tr");
     let prodTableData = document.createElement("td");
     let cantTableData = document.createElement("td");
@@ -201,59 +217,86 @@ function btnAgregar(e) {
     btnTableData.className = "colBorrar";
 
     nuevoRow.className = "productoRowTabla";
-
     nuevoRow.append(prodTableData, cantTableData, impTableData, btnTableData);
 
     let carritoJSON = JSON.stringify(productosCarrito);
     localStorage.setItem("carrito", carritoJSON);
     let valores = JSON.parse(localStorage.getItem("carrito"));
 
+    let elem = document.getElementById("tbody");
+    elem.innerHTML = "";
+
     valorCarrito = [];
-    for (let n of valores) {
-      valorCarrito.push($producto.total);
+    for (let n of productosCarrito) {
+      valorCarrito.push(n.total);
     }
     precioCarrito = valorCarrito.reduce((a, b) => {
       return a + b;
     }, 0);
 
-    document.querySelector(".detalleItemCarro").appendChild(nuevoRow);
+    //document.querySelector(".tbody").appendChild(nuevoRow);
     totalAPagar.innerHTML = "Total: $" + precioCarrito;
-    document.location.reload();
+    productosCarrito = [];
+    actualizarCarro();
+    /*document.location.reload();*/
   }
 }
 
-let borrarItem = document.querySelectorAll(".borrarItem");
+/*let borrarItem = document.querySelectorAll(".borrarItem");
 for (let b of borrarItem) {
   b.addEventListener("click", quitarItem);
-}
+}*/
 
 function quitarItem(e) {
-  let elemento = e.target;
-  let prodParaBorrar =
-    elemento.parentElement.parentElement.children[0].innerText;
+  e.preventDefault();
+  let elemento = e.target.parentNode.parentNode;
+  elemento.remove();
+  let prodParaBorrar = elemento.children[0].innerText;
 
   for (let x in productosCarrito) {
     if (productosCarrito[x].nombre == prodParaBorrar) {
       productosCarrito.splice(x, 1);
     }
   }
+
   localStorage.clear();
   let carritoJSON = JSON.stringify(productosCarrito);
   localStorage.setItem("carrito", carritoJSON);
-  let elem = document.querySelectorAll(".productoRowTabla");
+
+  let elem = document.getElementById("tbody");
+  elem.innerHTML = "";
+
+  let valores = JSON.parse(localStorage.getItem("carrito"));
+  console.log(valores);
+
+  valorCarrito = [];
+  for (let n of valores) {
+    valorCarrito.push(n.total);
+  }
+  precioCarrito = valorCarrito.reduce((a, b) => {
+    return a + b;
+  }, 0);
+  let totalAPagar = document.getElementById("totalAPagar");
+  totalAPagar.innerHTML = "Total: $" + precioCarrito;
+
+  /*let elem = document.querySelectorAll(".productoRowTabla");
   let valori = elem.length - 1;
   for (let i = valori; i >= 0; i--) {
     elem[i].parentNode.removeChild(elem[i]);
-  }
+  }*/
   productosCarrito = [];
   actualizarCarro();
-  document.location.reload();
+  //document.location.reload();*/
 }
 
 let limpiarCarrito = document.getElementById("vaciarCarrito");
-limpiarCarrito.addEventListener("click", () => {
+limpiarCarrito.addEventListener("click", (e) => {
+  e.preventDefault();
   localStorage.clear();
   productosCarrito = [];
-  actualizarCarro();
-  document.location.reload();
+  let elem = document.getElementById("tbody");
+  elem.innerHTML = "";
+  let totalAPagar = document.getElementById("totalAPagar");
+  totalAPagar.innerHTML = "Total: $0";
+  //document.location.reload();
 });
