@@ -56,8 +56,8 @@ function actualizarCarro() {
 
       let valoresInputs = document.querySelectorAll(".cant_input_carro");
       for (let valInputs of valoresInputs) {
-      valInputs.addEventListener("change", chequearInput);
-}
+        valInputs.addEventListener("change", chequearInput);
+      }
     }
   }
 }
@@ -65,14 +65,13 @@ function actualizarCarro() {
 
 function chequearInput(e) {
   let tecla = parseInt(e.target.value);
-  console.log(tecla);
   if (tecla <= 0) {
     let alerta = document.getElementById("alerta");
     alerta.className = "alerta";
     alerta.innerHTML = "<p>Debe colocar un valor mayor a cero</p>";
   } else {
-    alerta.className = ""
-    alerta.innerHTML = ""
+    alerta.className = "";
+    alerta.innerHTML = "";
     let lineaTarget =
       e.target.parentElement.parentElement.children[0].innerText;
     let productoSeleccionado = lineaTarget.toLowerCase();
@@ -90,11 +89,6 @@ function chequearInput(e) {
 
             let elem = document.getElementById("tbody");
             elem.innerHTML = "";
-
-            /*let elem = document.querySelectorAll(".productoRowTabla");
-            let valori = elem.length - 1;
-            for (let i = valori; i >= 0; i--) {
-              elem[i].parentNode.removeChild(elem[i]);*/
 
             productosCarrito = [];
             actualizarCarro();
@@ -173,22 +167,14 @@ function btnAgregar(e) {
         localStorage.setItem("carrito", carritoJSON);
         let elem = document.getElementById("tbody");
         elem.innerHTML = "";
-        /*let elem = document.querySelectorAll(".productoRowTabla");
-        let valori = elem.length - 1;
-        for (let i = valori; i >= 0; i--) {
-          elem[i].parentNode.removeChild(elem[i]);
-        }*/
+
         productosCarrito = [];
         actualizarCarro();
-
-        /*document.location.reload();
-        break;*/
       }
     }
   } else {
     let $producto = { nombre: prod, cantidad: cantidad, total: totalPrecio };
     productosCarrito.push($producto);
-    console.log(productosCarrito);
     let tableBody = document.getElementById("tbody");
     let nuevoRow = document.createElement("tr");
     let prodTableData = document.createElement("td");
@@ -234,18 +220,11 @@ function btnAgregar(e) {
       return a + b;
     }, 0);
 
-    //document.querySelector(".tbody").appendChild(nuevoRow);
     totalAPagar.innerHTML = "Total: $" + precioCarrito;
     productosCarrito = [];
     actualizarCarro();
-    /*document.location.reload();*/
   }
 }
-
-/*let borrarItem = document.querySelectorAll(".borrarItem");
-for (let b of borrarItem) {
-  b.addEventListener("click", quitarItem);
-}*/
 
 function quitarItem(e) {
   e.preventDefault();
@@ -267,7 +246,6 @@ function quitarItem(e) {
   elem.innerHTML = "";
 
   let valores = JSON.parse(localStorage.getItem("carrito"));
-  console.log(valores);
 
   valorCarrito = [];
   for (let n of valores) {
@@ -279,14 +257,8 @@ function quitarItem(e) {
   let totalAPagar = document.getElementById("totalAPagar");
   totalAPagar.innerHTML = "Total: $" + precioCarrito;
 
-  /*let elem = document.querySelectorAll(".productoRowTabla");
-  let valori = elem.length - 1;
-  for (let i = valori; i >= 0; i--) {
-    elem[i].parentNode.removeChild(elem[i]);
-  }*/
   productosCarrito = [];
   actualizarCarro();
-  //document.location.reload();*/
 }
 
 let limpiarCarrito = document.getElementById("vaciarCarrito");
@@ -298,5 +270,4 @@ limpiarCarrito.addEventListener("click", (e) => {
   elem.innerHTML = "";
   let totalAPagar = document.getElementById("totalAPagar");
   totalAPagar.innerHTML = "Total: $0";
-  //document.location.reload();
 });
