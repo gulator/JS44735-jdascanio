@@ -1,0 +1,77 @@
+[
+    {
+        "nombre": "manzana",
+        "precio": 7,
+        "imagen": "<img class='imgProducto' src='img/manzana_roja.jpg' alt='manzana roja'>"
+    },
+    {
+        "nombre": "cebolla",
+        "precio": 3,
+        "imagen": "<img class='imgProducto' src='img/cebolla.webp' alt='cebolla'>"
+    },
+    {
+        "nombre": "kiwi",
+        "precio": 11,
+        "imagen": "<img class='imgProducto' src='img/kiwi.webp' alt='kiwi'>"
+    },
+    {
+        "nombre": "limon",
+        "precio": 6,
+        "imagen": "<img class='imgProducto' src='img/limon.webp' alt='limon'>"
+    },
+    {
+        "nombre": "frutilla",
+        "precio": 2,
+        "imagen": "<img class='imgProducto' src='img/frutilla.webp' alt='frutilla'>"
+    },
+    {
+        "nombre": "pera",
+        "precio": 7,
+        "imagen": "<img class='imgProducto' src='img/pera.jpg' alt='pera'>"
+    },
+    {
+        "nombre": "banana",
+        "precio": 8,
+        "imagen": "<img class='imgProducto' src='img/banana.webp' alt='banana'>"
+    },
+    {
+        "nombre": "naranja",
+        "precio": 4,
+        "imagen": "<img class='imgProducto' src='img/naranja_g.jpg' alt='Naranja'>"
+    },
+    {
+        "nombre": "palta",
+        "precio": 15,
+        "imagen": "<img class='imgProducto' src='img/palta.webp' alt='Palta'>"
+    },
+    {
+        "nombre": "morron",
+        "precio": 10,
+        "imagen": "<img class='imgProducto' src='img/morron_rojo.webp' alt='Morron'>"
+    },
+    {
+        "nombre": "brocoli",
+        "precio": 14,
+        "imagen": "<img class='imgProducto' src='img/brocoli.webp' alt='brocoli'>"
+    },
+    {
+        "nombre": "repollo",
+        "precio": 9,
+        "imagen": "<img class='imgProducto' src='img/repollo_red.webp' alt='repollo'>"
+    },
+    {
+        "nombre": "berenjena",
+        "precio": 4,
+        "imagen": "<img class='imgProducto' src='img/berenjena.webp' alt='berenjena'>"
+    },
+    {
+        "nombre": "lechuga",
+        "precio": 7,
+        "imagen": "<img class='imgProducto' src='img/lechuga_criolla.jpg' alt='lechuga'>"
+    },
+    {
+        "nombre": "zanahoria",
+        "precio": 5,
+        "imagen": "<img class='imgProducto' src='img/zanahoria.jpg' alt='zanahoria'>"
+    }
+]
