@@ -4,6 +4,7 @@
 
   @import url("https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap");
 }
+
 .bgimage {
   height: 500px;
   background-image: url("../img/bg-main.webp");
@@ -63,22 +64,29 @@
   padding-right: 10px;
   border-left: 1px solid #dddddd;
   grid-area: carr;
+ 
 }
 
+
 h3 {
+  font-family: "Nothing You Could Do", cursive;
   margin: 6px;
-  color: grey;
+  color: rgb(31, 61, 116);
 }
 h4 {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Nothing You Could Do", cursive;
   margin: 6px;
-  color: grey;
+  color: rgb(31, 61, 116);
+  font-size: 1.5rem;
 }
 
 .detalleItemCarro p {
   margin: 1px;
   font-size: 0.75rem;
   padding: 5px;
-  color: grey;
+  color: rgb(31, 61, 116);
   border-color: 0px solid rgb(189, 189, 189);
 }
 .titulo {
@@ -87,15 +95,18 @@ h4 {
   color: rgb(0, 44, 0) !important;
 }
 .producto {
+  font-family: "Nothing You Could Do", cursive;
   text-align: left;
   padding-left: 10px;
-  font-size: 0.8rem;
-  color: grey;
+  font-size: 1.25rem;
+  color: rgb(31, 61, 116);
 }
 .valores {
+  font-family: "Nothing You Could Do", cursive;
   text-align: center;
-  font-size: 0.8rem;
-  color: grey;
+  font-size: 1.25rem;
+  color: rgb(31, 61, 116);
+  margin-bottom: 10px;
 }
 
 .colBorrar {
@@ -179,12 +190,14 @@ h5 {
 }
 
 .cant_input_carro {
+  font-family: "Nothing You Could Do", cursive;
   border: 0px solid;
   height: 25px;
   width: 40px;
   text-align: center;
-  font-size: 0.8rem;
-  color: grey;
+  font-size: 1.25rem;
+  color: rgb(31, 61, 116);
+  background: none;
 }
 .btn_carrito {
   cursor: pointer;
@@ -198,6 +211,9 @@ h5 {
 .headerCarrito {
   display: flex;
   justify-items: space-between;
+}
+table{
+  border-bottom: 1px solid grey;
 }
 .vaciarCarrito {
   width: 25px;
@@ -218,5 +234,5 @@ h5 {
   height: 25px;
   font-size: 0.9rem;
   width: 100%;
-  background: whitesmoke;
+  margin-bottom: 10px;
 }

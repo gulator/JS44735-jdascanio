@@ -114,7 +114,7 @@ function chequearInput(e) {
     let lineaTarget =
       e.target.parentElement.parentElement.children[0].innerText;
     let productoSeleccionado = lineaTarget.toLowerCase();
-    for (let items of productos) {
+    for (let items of arrayDeProducto) {
       if (items.nombre == productoSeleccionado) {
         let pUnitario = items.precio;
         for (let x of productosCarrito) {
@@ -122,7 +122,7 @@ function chequearInput(e) {
             x.cantidad = e.target.value;
             x.total = total(e.target.value, pUnitario);
 
-            localStorage.clear();
+            localStorage.removeItem('carrito');
             let carritoJSON = JSON.stringify(productosCarrito);
             localStorage.setItem("carrito", carritoJSON);
 
@@ -201,7 +201,7 @@ function btnAgregar(e) {
       if (x.nombre == prod) {
         x.cantidad += cantidad;
         x.total = total(x.cantidad, precio);
-        localStorage.clear();
+        localStorage.removeItem('carrito');
         let carritoJSON = JSON.stringify(productosCarrito);
         localStorage.setItem("carrito", carritoJSON);
         let elem = document.getElementById("tbody");
@@ -277,7 +277,7 @@ function quitarItem(e) {
     }
   }
 
-  localStorage.clear();
+  localStorage.removeItem('carrito');
   let carritoJSON = JSON.stringify(productosCarrito);
   localStorage.setItem("carrito", carritoJSON);
 
@@ -303,7 +303,7 @@ function quitarItem(e) {
 let limpiarCarrito = document.getElementById("vaciarCarrito");
 limpiarCarrito.addEventListener("click", (e) => {
   e.preventDefault();
-  localStorage.clear();
+  localStorage.removeItem('carrito');
   productosCarrito = [];
   let elem = document.getElementById("tbody");
   elem.innerHTML = "";
