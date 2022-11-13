@@ -2,12 +2,12 @@
 async function productosTodos (){
    let datos = await fetch("productos.json");
   let res = await datos.json();
-  await sessionStorage.setItem("listaProductos", JSON.stringify(res));
+  await localStorage.setItem("listaProductos", JSON.stringify(res));
  
 };
 productosTodos()
 
-let productosJSON = JSON.parse(sessionStorage.getItem("listaProductos"));
+let productosJSON = JSON.parse(localStorage.getItem("listaProductos"));
 let vegetales = [];
 let arrayDeProducto = [];
 
