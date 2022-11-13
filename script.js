@@ -1,25 +1,24 @@
-
 let productosJSON = JSON.parse(localStorage.getItem("listaProductos"));
-  console.log(productosJSON);
-  let vegetales = [];
-  let arrayDeProducto = [];
+console.log(productosJSON);
+let vegetales = [];
+let arrayDeProducto = [];
 
-  for (let n of productosJSON) {
-    vegetales.push(n.nombre);
-  }
-  vegetales.sort();
-  for (let x of vegetales) {
-    for (let y of productosJSON) {
-      if (y.nombre == x) {
-        arrayDeProducto.push(y);
-        break;
-      }
+for (let n of productosJSON) {
+  vegetales.push(n.nombre);
+}
+vegetales.sort();
+for (let x of vegetales) {
+  for (let y of productosJSON) {
+    if (y.nombre == x) {
+      arrayDeProducto.push(y);
+      break;
     }
   }
-  arrayDeProducto.forEach((producto) => {
-    let elemento = document.createElement("div");
-    elemento.className = "cardProducto";
-    elemento.innerHTML = `${producto.imagen}
+}
+arrayDeProducto.forEach((producto) => {
+  let elemento = document.createElement("div");
+  elemento.className = "cardProducto";
+  elemento.innerHTML = `${producto.imagen}
               <div class="descProducto">
                       <h5>${producto.nombre}</h5>
                       <h2>$${producto.precio}</h2>
@@ -32,10 +31,10 @@ let productosJSON = JSON.parse(localStorage.getItem("listaProductos"));
                       </div>
                       <button class="btn_carrito">agregar</button>
                   </div>`;
-    let seccion = document.getElementById("contenedorProductos");
+  let seccion = document.getElementById("contenedorProductos");
 
-    seccion.append(elemento);
-  });
+  seccion.append(elemento);
+});
 
 let productosCarrito = [];
 let valorCarrito = [];
@@ -97,6 +96,10 @@ function actualizarCarro() {
       for (let valInputs of valoresInputs) {
         valInputs.addEventListener("change", chequearInput);
       }
+      let valoresInputs2 = document.querySelectorAll(".cant_input");
+      for (let valInputs of valoresInputs2) {
+        valInputs.addEventListener("change", chequearInput2);
+      }
     }
   }
 }
@@ -122,7 +125,7 @@ function chequearInput(e) {
             x.cantidad = e.target.value;
             x.total = total(e.target.value, pUnitario);
 
-            localStorage.removeItem('carrito');
+            localStorage.removeItem("carrito");
             let carritoJSON = JSON.stringify(productosCarrito);
             localStorage.setItem("carrito", carritoJSON);
 
@@ -135,6 +138,17 @@ function chequearInput(e) {
         }
       }
     }
+  }
+}
+function chequearInput2(e) {
+  let tecla = parseInt(e.target.value);
+  if (tecla <= 0) {
+    let alerta = document.getElementById("alerta");
+    alerta.className = "alerta";
+    alerta.innerHTML = "<p>Debe colocar un valor mayor a cero</p>";
+  } else {
+    alerta.className = "";
+    alerta.innerHTML = "";
   }
 }
 
@@ -201,7 +215,17 @@ function btnAgregar(e) {
       if (x.nombre == prod) {
         x.cantidad += cantidad;
         x.total = total(x.cantidad, precio);
-        localStorage.removeItem('carrito');
+
+        Toastify({
+          text: `Se agregó ${cantidad} ${prod}`,
+          duration: 2500,
+          gravity: "bottom",
+          style: {
+            background: "linear-gradient(0deg, #002c00, #56ab2f)",
+          },
+        }).showToast();
+
+        localStorage.removeItem("carrito");
         let carritoJSON = JSON.stringify(productosCarrito);
         localStorage.setItem("carrito", carritoJSON);
         let elem = document.getElementById("tbody");
@@ -244,6 +268,15 @@ function btnAgregar(e) {
     nuevoRow.className = "productoRowTabla";
     nuevoRow.append(prodTableData, cantTableData, impTableData, btnTableData);
 
+    Toastify({
+      text: `Se agregó ${cantidad} ${prod}`,
+      duration: 2500,
+      gravity: "bottom",
+      style: {
+        background: "linear-gradient(0deg, #002c00, #56ab2f)",
+      },
+    }).showToast();
+
     let carritoJSON = JSON.stringify(productosCarrito);
     localStorage.setItem("carrito", carritoJSON);
     let valores = JSON.parse(localStorage.getItem("carrito"));
@@ -277,7 +310,7 @@ function quitarItem(e) {
     }
   }
 
-  localStorage.removeItem('carrito');
+  localStorage.removeItem("carrito");
   let carritoJSON = JSON.stringify(productosCarrito);
   localStorage.setItem("carrito", carritoJSON);
 
@@ -303,7 +336,7 @@ function quitarItem(e) {
 let limpiarCarrito = document.getElementById("vaciarCarrito");
 limpiarCarrito.addEventListener("click", (e) => {
   e.preventDefault();
-  localStorage.removeItem('carrito');
+  localStorage.removeItem("carrito");
   productosCarrito = [];
   let elem = document.getElementById("tbody");
   elem.innerHTML = "";

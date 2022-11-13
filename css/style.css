@@ -6,7 +6,7 @@
 }
 
 .bgimage {
-  height: 500px;
+  height: 400px;
   background-image: url("../img/bg-main.webp");
   object-fit: cover;
   display: flex;
@@ -58,15 +58,14 @@
   gap: 10px;
 }
 
-.carrito {
-  width: 400px;
+.carrito {  
+  
+  width: 350px;
   padding-left: 10px;
   padding-right: 10px;
   border-left: 1px solid #dddddd;
   grid-area: carr;
- 
 }
-
 
 h3 {
   font-family: "Nothing You Could Do", cursive;
@@ -92,7 +91,7 @@ h4 {
 .titulo {
   font-size: 0.8rem !important;
   font-weight: bold;
-  color: rgb(0, 44, 0) !important;
+  color: #002c00 !important;
 }
 .producto {
   font-family: "Nothing You Could Do", cursive;
@@ -141,6 +140,8 @@ h4 {
 .itemCarro {
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
 }
 .visualItemCarro {
   display: flex;
@@ -212,7 +213,7 @@ h5 {
   display: flex;
   justify-items: space-between;
 }
-table{
+table {
   border-bottom: 1px solid grey;
 }
 .vaciarCarrito {
@@ -235,4 +236,34 @@ table{
   font-size: 0.9rem;
   width: 100%;
   margin-bottom: 10px;
+}
+
+.mostrarCarrito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00bc0d;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  
+}
+
+.iconoCarrito {
+  width: 35px;
+  filter: invert(100%) sepia(1%) saturate(2359%) hue-rotate(190deg)
+    brightness(119%) contrast(92%);
+}
+
+.cerrarCarrito {
+  cursor: pointer;
+  width: 25px;
+  filter: invert(9%) sepia(28%) saturate(7280%) hue-rotate(322deg)
+    brightness(99%) contrast(112%);
+}
+.ocultar{
+  display: none;
 }

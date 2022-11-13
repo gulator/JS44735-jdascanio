@@ -11,10 +11,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Titillium+Web:ital@0;1&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 
     <link rel="stylesheet" href="css/style.css">
-    
+
 </head>
 
 <body>
@@ -31,10 +32,11 @@
     </section>
     <div class="areaGrid">
         <section class="contenedor" id="contenedorProductos">
-            
+
         </section>
         <section class="carrito">
             <div class="itemCarro">
+                <!-- <img id="cerrarCarrito" class="cerrarCarrito" src="img/x-square.svg" alt="vaciar carrito"> -->
                 <div class="headerCarrito">
                     <h3>Tu compra</h3>
                     <img id="vaciarCarrito" class="vaciarCarrito" src="img/trash.svg" alt="vaciar carrito">
@@ -49,16 +51,20 @@
                         </tr>
                     </thead>
                     <tbody id="tbody" class="tbody">
-                        
+
                     </tbody>
                 </table>
                 <h4 id="totalAPagar">Total: $0</h4>
-                
+
             </div>
         </section>
     </div>
+    <!-- <div class="mostrarCarrito" id="mostrarCarrito">
+        <img class="iconoCarrito" src="img/cart.svg" alt="">
+    </div> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="constructor.js"></script>
-    <script src="testing.js"></script>
+    <!-- <script src="testing.js"></script> -->
     <!-- <script src="productos.js"></script> -->
     <script src="script.js"></script>
 </body>
