@@ -1,9 +1,9 @@
 //localStorage.removeItem('listaProductos')
-let productosTodos = fetch("productos.json")
+fetch("productos.json")
   .then((response) => response.json())
   .then((data) => {
     let valoresLocal = localStorage.setItem("listaProductos", JSON.stringify(data));
-    console.log(valoresLocal)
+    
 });
 
 /*fetch('productos.json')
