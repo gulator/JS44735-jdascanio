@@ -52,7 +52,7 @@ function showPosition(posicion) {
           } else if (rotacion == "C") {
             weatherCard.innerHTML = `<img class="imagenIcono" src=" https://openweathermap.org/img/wn/${icono}@2x.png">
                                         <div class="info"><p class="txt-clima">${data.name}</p>
-                                        <p class="txt-clima">Humedad: ${data.main.humidity}°</p>`;
+                                        <p class="txt-clima">Humedad: ${data.main.humidity}%</p>`;
             segundos -= 1;
             console.log(segundos);
             if (segundos == 0) {
